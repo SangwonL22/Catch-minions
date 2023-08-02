@@ -138,6 +138,16 @@ button {
   font-size: 120px;
 }
 
+.minion {
+  width: 130px;
+  height: 130px;
+}
+
+.evil {
+  width: 115px;
+  height: 130px;
+}
+
 .minion,
 .evil {
   transition: all 100ms ease-in-out;

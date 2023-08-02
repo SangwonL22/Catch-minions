@@ -19,16 +19,23 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener('click', onFieldClick);
+
 gameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
-  started = !started;
+});
+
+popUpRefresh.addEventListener('click', () => {
+  startGame();
+  hidePopUp();
 });
 
 function startGame() {
+  started = true;
   initGame();
   showStopButton();
   showTimeAndScore();
@@ -36,19 +43,27 @@ function startGame() {
 }
 
 function stopGame() {
+  started = false;
   stopGameTimer();
   hideGameButton();
   showPopUpWithText('Try Again💡');
 }
 
+function finishGame(win) {
+  started = false;
+  hideGameButton();
+  showPopUpWithText(win ? 'Yay! Clear✨' : 'LOST🍌');
+}
+
 function showStopButton() {
-  const icon = gameBtn.querySelector('.fa-google-play');
+  const icon = gameBtn.querySelector('.fa-brands');
   icon.classList.add('fa-app-store-ios');
   icon.classList.remove('fa-google-play');
 }
 
 function hideGameButton() {
   gameBtn.style.visibility = 'hidden';
+  gameTimer.style.visibility = 'hidden';
 }
 
 function showTimeAndScore() {
@@ -62,6 +77,7 @@ function startGameTimer() {
   timer = setInterval(() => {
     if (remainingTimeSec <= 0) {
       clearInterval(timer);
+      finishGame(MINION_COUNT === score);
       return;
     }
     updateTimerText(--remainingTimeSec);
@@ -83,11 +99,37 @@ function showPopUpWithText(text) {
   popUp.classList.remove('pop-up--hide');
 }
 
+function hidePopUp() {
+  popUp.classList.add('pop-up--hide');
+}
+
 function initGame() {
   field.innerHTML = '';
   gameScore.innerText = MINION_COUNT;
   addItem('minion', MINION_COUNT, 'imgs/minion.png');
   addItem('evil', EVIL_COUNT, 'imgs/evil.png');
+}
+
+function onFieldClick(event) {
+  if (!started) {
+    return;
+  }
+  const target = event.target;
+  if (target.matches('.minion')) {
+    target.remove();
+    score++;
+    updateScoreBoard();
+    if (score === MINION_COUNT) {
+      finishGame(true);
+    }
+  } else if (target.matches('.evil')) {
+    stopGameTimer();
+    finishGame(false);
+  }
+}
+
+function updateScoreBoard() {
+  gameScore.innerText = MINION_COUNT - score;
 }
 
 function addItem(className, count, imgPath) {

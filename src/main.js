@@ -1,9 +1,9 @@
 'use strict';
 
 const MINION_SIZE = 130;
-const MINION_COUNT = 6;
-const EVIL_COUNT = 3;
-const GAME_DURATION_SEC = 5;
+const MINION_COUNT = 10;
+const EVIL_COUNT = 10;
+const GAME_DURATION_SEC = 10;
 
 const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect();
@@ -14,6 +14,12 @@ const gameScore = document.querySelector('.game__score__total');
 const popUp = document.querySelector('.pop-up');
 const popUpText = document.querySelector('.pop-up__message');
 const popUpRefresh = document.querySelector('.pop-up__refresh');
+
+const minionSound = new Audio('./sound/minion_pull.mp3');
+const alertSound = new Audio('./sound/alert.wav');
+const bgSound = new Audio('./sound/bg.mp3');
+const evilSound = new Audio('./sound/evil_pull.mp3');
+const winSound = new Audio('./sound/game_win.mp3');
 
 let started = false;
 let score = 0;
@@ -40,6 +46,7 @@ function startGame() {
   showStopButton();
   showTimeAndScore();
   startGameTimer();
+  playSound(bgSound);
 }
 
 function stopGame() {
@@ -47,11 +54,20 @@ function stopGame() {
   stopGameTimer();
   hideGameButton();
   showPopUpWithText('Try Again💡');
+  playSound(alertSound);
+  stopSound(bgSound);
 }
 
 function finishGame(win) {
   started = false;
   hideGameButton();
+  if (win) {
+    playSound(winSound);
+  } else {
+    playSound(evilSound);
+  }
+  stopGameTimer();
+  stopSound(bgSound);
   showPopUpWithText(win ? 'Yay! Clear✨' : 'LOST🍌');
 }
 
@@ -59,6 +75,7 @@ function showStopButton() {
   const icon = gameBtn.querySelector('.fa-brands');
   icon.classList.add('fa-app-store-ios');
   icon.classList.remove('fa-google-play');
+  gameBtn.style.visibility = 'visible';
 }
 
 function hideGameButton() {
@@ -104,6 +121,7 @@ function hidePopUp() {
 }
 
 function initGame() {
+  score = 0;
   field.innerHTML = '';
   gameScore.innerText = MINION_COUNT;
   addItem('minion', MINION_COUNT, 'imgs/minion.png');
@@ -118,14 +136,23 @@ function onFieldClick(event) {
   if (target.matches('.minion')) {
     target.remove();
     score++;
+    playSound(minionSound);
     updateScoreBoard();
     if (score === MINION_COUNT) {
       finishGame(true);
     }
   } else if (target.matches('.evil')) {
-    stopGameTimer();
     finishGame(false);
   }
+}
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function stopSound(sound) {
+  sound.pause();
 }
 
 function updateScoreBoard() {

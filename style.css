@@ -39,6 +39,8 @@ button {
   border-bottom: 4px solid darkgrey;
   border-radius: 20px 20px 0 0;
   gap: 8px;
+  user-select: none;
+  cursor: auto;
 }
 
 .game__button {
@@ -49,6 +51,8 @@ button {
   border: 2px dashed darkgray;
   border-radius: 40%;
   font-size: 32px;
+  user-select: auto;
+  cursor: pointer;
 }
 
 .game__button i {
@@ -132,4 +136,14 @@ button {
 .pop-up__message {
   display: block;
   font-size: 120px;
+}
+
+.minion,
+.evil {
+  transition: all 100ms ease-in-out;
+}
+
+.minion:hover,
+.evil:hover {
+  transform: scale(1.1);
 }

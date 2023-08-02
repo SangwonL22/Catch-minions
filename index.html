@@ -4,25 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>catch minions</title>
+    <!-- Font awesone -->
     <script
       src="https://kit.fontawesome.com/13cb755b54.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="css/style.css" />
+    <!-- Favicon -->
+    <link rel="icon" href="imgs/favicon.png" type="image/x-icon" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- JavaScript -->
     <script src="src/main.js" defer></script>
   </head>
   <body>
+    <header class="game__header">
+      <div class="game__play">
+        <h1 class="game__play__title">
+          Play button:
+          <button class="game__button">
+            <i class="fa-brands fa-google-play"></i>
+          </button>
+        </h1>
+      </div>
+      <div class="game__score">
+        <h1 class="game__score__title">
+          Current Score:
+          <span class="game__score__des">0</span>
+        </h1>
+      </div>
+      <div class="game__timer">
+        <h1 class="game__timer__title">
+          Time left:
+          <span class="game__timer__des">0:0</span>
+        </h1>
+      </div>
+    </header>
     <section class="game">
-      <header class="game__header">
-        <button class="game__button">
-          <i class="fa-brands fa-google-play"></i>
-        </button>
-        <span class="game__timer">0:0</span>
-        <span class="game__score">0</span>
-      </header>
       <section class="game__field"></section>
     </section>
-    <section class="pop-up">
+    <section class="pop-up pop-up--hide">
       <button class="pop-up__refresh">
         <i class="fa-solid fa-rotate-right"></i>
       </button>

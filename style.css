@@ -9,7 +9,8 @@ body {
 }
 
 h1 {
-  margin: 12px;
+  font-size: 42px;
+  margin: 8px;
 }
 
 button {
@@ -73,12 +74,13 @@ button {
 
 .game__timer__left {
   display: inline-block;
-  width: 100px;
-  margin: 10px 0;
+  width: 150px;
+  height: 60px;
+  line-height: 60px;
   background-color: white;
   outline: 4px dashed darkgray;
   border-radius: 20px;
-  font-size: 32px;
+  font-size: 48px;
   visibility: hidden;
 }
 
@@ -117,6 +119,14 @@ button {
   background-color: white;
   outline: 5px dashed gray;
   border-radius: 100%;
+}
+
+.pop-up__refresh i {
+  transition: transform 300ms ease-in;
+}
+
+.pop-up__refresh:hover i {
+  transform: scale(1.1);
 }
 
 .pop-up__message {

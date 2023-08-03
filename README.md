@@ -33,4 +33,9 @@
 ## Replay Sence<br/>
 
 <img src="https://github.com/SangwonL22/Catch-minions/assets/139116831/e688b67f-65d5-4592-bef7-c98f1e8ebbb3" style="width: 400px" /><br/>
+
+## Target<br/>
+
+<img src="https://github.com/SangwonL22/Catch-minions/assets/139116831/be26d550-cce4-4e42-a2c1-162e431debe6" style="width: 400px" /><br/>
+
 </div>

@@ -1,7 +1,7 @@
 # Catch minions Game
  
  ## Github Link
- https://sangwonl22.github.io/Catch-minions/
+ https://majestic-sfogliatella-bc9f01.netlify.app/
 <div align="center">
  
  ## Start Sence<br/>
